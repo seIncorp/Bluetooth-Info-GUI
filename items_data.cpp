@@ -1,32 +1,40 @@
 
 #include "bluetoothinfogui.h"
 
-
-
-ITEMS_DATA::ITEMS_USING::ITEMS_USING()
+ITEMS_DATA::SERVICE::SERVICE(QString name)
 {
-	i = new ITEMS();
+	createServiceItem(name);
 }
 
-void ITEMS_DATA::ITEMS_USING::createTopItem(int level, QString text)
+/*******************************************************/
+/* SERVICE items */
+void ITEMS_DATA::SERVICE::createServiceItem(QString text)
 {
-	i->top_level_items_list.push_back(new QTreeWidgetItem());
-	i->top_level_items_list.at(i->top_level_items_list.size() - 1)->setText(level, text);
+	service = new SERVICE_DATA(text);
 }
 
-void ITEMS_DATA::ITEMS_USING::addTopItem(int pos, Ui::BluetoothInfoGUIClass ui)
+void ITEMS_DATA::SERVICE::addServiceItem(Ui::BluetoothInfoGUIClass ui)
 {
-	ui.treeWidget->addTopLevelItem(i->top_level_items_list.at(pos));
+	service->addToTreeView(ui);
 }
 
-void ITEMS_DATA::ITEMS_USING::createChildItem(int level, QString text)
-{
-	i->child_items_list.push_back(new QTreeWidgetItem());
-	i->child_items_list.at(i->child_items_list.size() - 1)->setText(level, text);
+/***********************************************************************************/
+/* ATTRIBUTE items */
 
+void ITEMS_DATA::SERVICE::createAttributeItem(QString text, int show)
+{
+	service->attributes_list.push_back(new ATTRIBUTE_DATA(text));
+
+	if(show == 1)
+		service->addChildToService(service->attributes_list.size()-1);
 }
 
-void ITEMS_DATA::ITEMS_USING::addChildItem(int topItem, int pos)
+void ITEMS_DATA::SERVICE::addAttributeItem(int attributeItem_pos)
 {
-	i->top_level_items_list.at(topItem)->addChild(i->child_items_list.at(pos));
+	service->addChildToService(attributeItem_pos);
 }
+
+
+
+
+

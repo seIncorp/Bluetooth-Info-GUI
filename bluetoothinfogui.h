@@ -10,8 +10,19 @@ class BluetoothInfoGUI : public QMainWindow
 public:
     BluetoothInfoGUI(QWidget *parent = Q_NULLPTR);
 
+
+    //void on_SearchAndSelect();
+    void on_ByAddress();
+    //void on_About();
+    //void on_Exit();
+
+
 private:
     Ui::BluetoothInfoGUIClass ui;
 };
+
+
+
+
 
 #include "items_data.h"

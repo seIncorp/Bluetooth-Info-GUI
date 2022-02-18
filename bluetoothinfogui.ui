@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>604</width>
-    <height>400</height>
+    <width>603</width>
+    <height>421</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,20 +17,35 @@
    <widget class="QTreeWidget" name="treeWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>601</width>
+      <x>10</x>
+      <y>20</y>
+      <width>591</width>
       <height>341</height>
      </rect>
     </property>
     <column>
      <property name="text">
-      <string>Text</string>
+      <string>Services</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Value</string>
+      <string>Attributes</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>ID/VALUEs</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Types</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Values</string>
      </property>
     </column>
    </widget>
@@ -40,10 +55,32 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>604</width>
+     <width>603</width>
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menu_File">
+    <property name="title">
+     <string>&amp;File</string>
+    </property>
+    <addaction name="action_Exit"/>
+   </widget>
+   <widget class="QMenu" name="menuSearch">
+    <property name="title">
+     <string>&amp;Search</string>
+    </property>
+    <addaction name="action_Search_and_Select"/>
+    <addaction name="action_By_Address"/>
+   </widget>
+   <widget class="QMenu" name="menuOther">
+    <property name="title">
+     <string>&amp;Other</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menu_File"/>
+   <addaction name="menuSearch"/>
+   <addaction name="menuOther"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -54,10 +91,47 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="action_Search_and_Select">
+   <property name="text">
+    <string>&amp;Search and Select</string>
+   </property>
+  </action>
+  <action name="action_By_Address">
+   <property name="text">
+    <string>&amp;By Address</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About</string>
+   </property>
+  </action>
+  <action name="action_Exit">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="bluetoothinfogui.qrc"/>
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>action_By_Address</sender>
+   <signal>triggered()</signal>
+   <receiver>centralWidget</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>301</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
