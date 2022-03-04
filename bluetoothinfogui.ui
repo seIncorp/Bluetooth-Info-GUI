@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>603</width>
-    <height>421</height>
+    <width>715</width>
+    <height>507</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,11 +18,14 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>591</width>
-      <height>341</height>
+      <y>0</y>
+      <width>701</width>
+      <height>281</height>
      </rect>
     </property>
+    <attribute name="headerVisible">
+     <bool>true</bool>
+    </attribute>
     <column>
      <property name="text">
       <string>Services</string>
@@ -49,13 +52,26 @@
      </property>
     </column>
    </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>290</y>
+      <width>701</width>
+      <height>161</height>
+     </rect>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>603</width>
+     <width>715</width>
      <height>22</height>
     </rect>
    </property>
@@ -76,6 +92,9 @@
     <property name="title">
      <string>&amp;Other</string>
     </property>
+    <addaction name="action_Radio_data"/>
+    <addaction name="actionSearched_cached_devices"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu_File"/>
@@ -111,27 +130,20 @@
     <string>&amp;Exit</string>
    </property>
   </action>
+  <action name="action_Radio_data">
+   <property name="text">
+    <string>&amp;Radio data</string>
+   </property>
+  </action>
+  <action name="actionSearched_cached_devices">
+   <property name="text">
+    <string>&amp;Searched cached devices</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
   <include location="bluetoothinfogui.qrc"/>
  </resources>
- <connections>
-  <connection>
-   <sender>action_By_Address</sender>
-   <signal>triggered()</signal>
-   <receiver>centralWidget</receiver>
-   <slot>show()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>301</x>
-     <y>216</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

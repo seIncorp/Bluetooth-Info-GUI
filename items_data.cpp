@@ -1,5 +1,8 @@
 
-#include "bluetoothinfogui.h"
+//#include "bluetoothinfogui.h"
+
+#include "main.h"
+
 
 ITEMS_DATA::SERVICE::SERVICE(QString name)
 {
