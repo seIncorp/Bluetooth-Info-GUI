@@ -19,8 +19,8 @@
 
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QMainWindow>
-#include "ui_bluetoothinfogui.h"
-#include "ui_by_address_dialog.h"
+//#include "ui_bluetoothinfogui.h"
+//#include "ui_by_address_dialog.h"
 
 
 #pragma comment(lib, "Ws2_32.lib")
@@ -34,6 +34,9 @@ extern IOCTL_S::DEFAULT_DATA dd;
 
 
 #include "bluetoothinfogui.h"
+#include "settingsgui.h"
+#include "radiogui.h"
+#include "byaddressgui.h"
 #include <QtWidgets/QApplication>
 
 

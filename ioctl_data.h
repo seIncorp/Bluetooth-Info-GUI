@@ -11,14 +11,61 @@
 /*
 	TODO:
 	- BUG: check why app crash when use and call set_all_SDP_service_for_search() with SDPsearch() [FIXED: NOT USING GenericAudio service]
-	- ADD: debug option
-	- ADD: print option
+	- ADD: record attribute and not to use default directly
+	- ADD: dodaj se za print only one za outside print function (trenutno se vse sprinta)
 
+	- ADD: dodaj se za HandsfreeAudioGateway service	<-- DONE!!!
+	- ADD: dodaj se za razlikovanje Handsfree in HandsfreeAG izpis featurjev	<-- DONE!!!
+	- DO: popravi in uredi izpis PROTOCOL DESCRIPTOR LIST	<-- DONE!!!
+	- ADD: dodaj logiko debug, print, itd. za  PNPINFO	<-- DONE!!!
+	- IMPROVE: all specific attributes change printing from print all to printall/print one only, same as for default	<-- DONE!!!
 
 
 */
 
+/*************************************************/
+/*************************************************/
+/* DEFINING TEXT FOR PRINTING */
+#define DELIMITER_PRINT "************************************************\n"
+#define ATTR_NAME_0		"RECORD HANDLE: \n"
+#define ATTR_NAME_1		"CLASS ID: \n"
+#define ATTR_NAME_2		"PROTOCOL DESCRIPTOR LIST: \n"
+#define ATTR_NAME_3		"SERVICE NAME: \n"
+#define ATTR_NAME_4		"PROVIDER NAME: \n"
+#define ATTR_NAME_5		"BLUETOOTH PROFILE DESCRIPTOR LIST: \n"
+#define ATTR_NAME_6		"LANGUAGE ATTRIBUTE ID LIST: \n"
+#define ATTR_NAME_7		"SERVICE DESCRIPTION: \n"
+#define ATTR_NAME_8		"GOEPL2CAPPSM: \n"
+#define ATTR_NAME_9		"SUPORTED FEATURES: \n"
+#define ATTR_NAME_10	"SUPPORTED MESSAGE TYPES: \n"
+#define ATTR_NAME_11	"MAS INSTACE ID: \n"
+#define ATTR_NAME_12	"MAP SUPPORTED FEATURES: \n"
+#define ATTR_NAME_13	"NETWORK: \n"
+#define ATTR_NAME_14	"REMOTE AUDIO VOLUME CONTROL: \n"
+#define ATTR_NAME_15	"SECURITY DESCRIPTION: \n"
+#define ATTR_NAME_16	"NET ACCESS TYPE: \n"
+#define ATTR_NAME_17	"MAX NET ACCESS RATE: \n"
+#define ATTR_NAME_18	"SUPPORTED FORMATS: \n"
+#define ATTR_NAME_19	"SUPPORTED REPOSITORIES: \n"
+#define ATTR_NAME_20	"PBAP SUPPORTED FEATURES: \n"
+#define ATTR_NAME_21	"INFO: \n"
 
+
+
+#define VALUE_1			"VALUE ELEMENT:\n"
+#define VALUE_2			"ATTRIBUTE ID:\n"
+#define VALUE_3			"Type:"
+#define VALUE_4			"Size:"
+#define VALUE_5			"Value:"
+#define VALUE_6			"Additional size:"
+#define VALUE_7			"Supported features:"
+
+
+/*************************************************/
+/*************************************************/
+/* DEFINING VALUES */
+
+#define MAX_TEMP_STRING_LENGTH	500
 
 /************************************************************************/
 /* ENUMs */
@@ -504,8 +551,8 @@ namespace BTH_DEVICES
 
 namespace IOCTL_S
 {
-	
-	
+
+
 	/* MAIN structure */
 	struct SDP_DATA_API DEFAULT_DATA
 	{
@@ -531,7 +578,7 @@ namespace IOCTL_S
 			//BYTE Message_Access_Profile;
 			BYTE PnPInformation;
 		};
-		
+
 		struct SDP_exported_data
 		{
 			// SDP services
@@ -558,6 +605,7 @@ namespace IOCTL_S
 			int debug;
 			int print;
 			int print_info;
+			int print_with_outside_funct;
 
 			struct SDP_print_service
 			{
@@ -572,9 +620,81 @@ namespace IOCTL_S
 				int print_service_description;
 				//int print_service_availability;
 
+				/***********************************************/
 				/* SPECIAL ATTR. */
+				
+				/* PNPINFO */
+				struct print_PNPINFO
+				{
+					int print_pnp_info;
+				};
+				print_PNPINFO print_PNPINFO_attributes;
 
+				/* PBAP */
+				struct print_PBAP
+				{
+					int print_goepl2cappsm;
+					int print_supported_repositories;
+					int print_pbap_supported_features;
+				};
+				print_PBAP print_PBAP_attributes;
 
+				/* OBEX */
+				struct print_OBEX
+				{
+					int print_goepl2cappsm;
+					int print_supported_formats;
+					int print_service_version;
+				};
+				print_OBEX print_OBEX_attributes;
+
+				/* NAP */
+				struct print_NAP
+				{
+					int print_security_description;
+					int print_net_access_type;
+					int print_max_net_access_rate;
+				};
+				print_NAP print_NAP_attributes;
+
+				/* HSP */
+				struct print_HSP
+				{
+					int print_remote_audio_volume_control;
+				};
+				print_HSP print_HSP_attributes;
+
+				/* HFP */
+				struct print_HFP
+				{
+					int print_network;
+					int print_supported_features;
+				};
+				print_HFP print_HFP_attributes;
+
+				/* AVRCP */
+				struct print_AVRCP
+				{
+					int print_supported_features;
+				};
+				print_AVRCP print_AVRCP_attributes;
+
+				/* A2DP */
+				struct print_A2DP
+				{
+					int print_supported_features;
+				};
+				print_A2DP print_A2DP_attributes;
+
+				/* MAP */
+				struct print_MAP
+				{
+					int print_goepl2cappsm;
+					int print_supported_message_types;
+					int print_mas_instance_id;
+					int print_map_supported_features;
+				};
+				print_MAP print_MAP_attributes;
 
 			};
 
@@ -592,14 +712,26 @@ namespace IOCTL_S
 		void reset_SDP_service_for_search();
 		void set_all_SDP_service_for_search();
 
+
+		// currently only for x64, does not work for x86
+		// pointer to outside print function
+		void (*outside_print_function) (std::string text, ...);
+		BYTE* data_outside_print_function;
+
+		SHORT temp_class_id;	//only for AVRCP!!!!
+		SHORT temp_service;		// only for HFP!!!!
+
 	private:
 		double vesrion;
 		char* author;
 	};
 
 
-	/* LOCAL functions */
+
 	
+
+	/* LOCAL functions */
+
 	int str2ba(const char* straddr, BTH_ADDR* btaddr);
 
 
@@ -615,6 +747,7 @@ namespace IOCTL_S
 
 	SDP_DATA_API void printErrorMessage(DWORD id);
 
+	
 };
 
 
@@ -729,6 +862,7 @@ namespace SDP
 		ULONG buffer_res[1];
 		BOOL sdp_service_search_res;
 		SHORT current_used_service;
+		SHORT avrcp_class_id;	// only for AVRCP service
 
 		// for disconnection
 		BTH_SDP_DISCONNECT* bsd;
@@ -757,65 +891,166 @@ namespace SDP
 
 		} VALUE;
 
-		void printATTR_ELEMENT()
+		void printATTR_ELEMENT(IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("ATTRIBUTE ID:\n");
-			printf("Type: %s [%d]\n", SDP::SUB_FUNCTIONS::getElementTypeString(attr_id->element->element.type).c_str(), attr_id->element->element.type);
-
-			if (attr_id->additional_bits_flag)
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
 			{
-				printf("Additional size: %d\n", attr_id->additional_bits_for_size);
-			}
-			else
-			{
-				printf("Size: %d Bytes [%d]\n", attr_id->size_bytes, attr_id->size_bytes);
+				dd.outside_print_function(VALUE_2);
 
-				printf("Value: 0x");
-				for (int a = 0; a < attr_id->size_bytes; a++)
-					printf("%02X", attr_id->value[a]);
-				printf("\n");
-			}
-		}
+				char test[100]{ 0 };
+				sprintf_s(test, "%s %s [%d]\n", VALUE_3, SDP::SUB_FUNCTIONS::getElementTypeString(attr_id->element->element.type).c_str(), attr_id->element->element.type);
+				dd.outside_print_function(test);
 
-		template<class T>
-		void printVALUE_ELEMENT(T v)
-		{
-			printf("VALUE ELEMENT:\n");
-			printf("Type: %s [%d]\n", SDP::SUB_FUNCTIONS::getElementTypeString(v.element->element.type).c_str(), v.element->element.type);
-			if (v.additional_bits_flag)
-			{
-				printf("Additional size: %d\n", v.additional_bits_for_size);
-				if (v.additional_bits_for_size == 1)
+				if (attr_id->additional_bits_flag)
 				{
-					printf("Data size: %d\n", v.size_bytes);
+					sprintf_s(test, "%s %d\n", VALUE_6, attr_id->additional_bits_for_size);
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					sprintf_s(test, "%s %d Bytes [%d]\n", VALUE_4, attr_id->size_bytes, attr_id->size_bytes);
+					dd.outside_print_function(test);
 
-					printf("Value: ");
-					for (int a = 0; a < v.size_bytes; a++)
-						printf("0x%02X ", v.value[a]);
-					printf("\n");
+					sprintf_s(test, "%s ", VALUE_5);
+					for (int a = 0; a < attr_id->size_bytes; a++)
+						sprintf_s(test, "%s0x%02X ", test, attr_id->value[a]);
+					
+					sprintf_s(test, "%s\n", test);
+					dd.outside_print_function(test);
 				}
 			}
 			else
 			{
-				printf("Size: %d Bytes [%d]\n", v.size_bytes, v.size_bytes);
+				printf(VALUE_2);
+				printf("%s %s [%d]\n", VALUE_3, SDP::SUB_FUNCTIONS::getElementTypeString(attr_id->element->element.type).c_str(), attr_id->element->element.type);
 
-				printf("Value: 0x");
-				for (int a = 0; a < v.size_bytes; a++)
-					printf("%02X", v.value[a]);
-				printf("\n");
+				if (attr_id->additional_bits_flag)
+				{
+					printf("%s %d\n", VALUE_6, attr_id->additional_bits_for_size);
+				}
+				else
+				{
+					printf("%s %d Bytes [%d]\n", VALUE_4, attr_id->size_bytes, attr_id->size_bytes);
+
+					printf("%s 0x", VALUE_5);
+					for (int a = 0; a < attr_id->size_bytes; a++)
+						printf("%02X", attr_id->value[a]);
+					printf("\n");
+				}
+
+			}
+		}
+
+		template<class T>
+		void printVALUE_ELEMENT(T v, IOCTL_S::DEFAULT_DATA dd)
+		{
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(VALUE_1);
+
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+
+				sprintf_s(test, "%s %s [%d]\n", VALUE_3, SDP::SUB_FUNCTIONS::getElementTypeString(v.element->element.type).c_str(), v.element->element.type);
+				dd.outside_print_function(test);
+
+				if (v.additional_bits_flag)
+				{
+					sprintf_s(test, "%s %d\n", VALUE_6, v.additional_bits_for_size);
+					dd.outside_print_function(test);
+
+					if (v.additional_bits_for_size == 1)
+					{
+						sprintf_s(test, "Data size: %d\n", v.size_bytes);
+						dd.outside_print_function(test);
+
+						sprintf_s(test, "%s ", VALUE_5);
+
+						for (int a = 0; a < v.size_bytes; a++)
+							sprintf_s(test, "%s0x%02X ", test, v.value[a]);
+
+						sprintf_s(test, "%s\n", test);
+						dd.outside_print_function(test);
+					}
+				}
+				else
+				{
+					sprintf_s(test, "%s %d Bytes [%d]\n", VALUE_4, v.size_bytes, v.size_bytes);
+					dd.outside_print_function(test);
+
+					sprintf_s(test, "%s ", VALUE_5);
+					for (int a = 0; a < v.size_bytes; a++)
+						sprintf_s(test, "%s0x%02X ",test, v.value[a]);
+
+					sprintf_s(test, "%s\n",test);
+					dd.outside_print_function(test);
+				}
+			}
+			else
+			{
+				printf(VALUE_1);
+				printf("%s %s [%d]\n", VALUE_3, SDP::SUB_FUNCTIONS::getElementTypeString(v.element->element.type).c_str(), v.element->element.type);
+
+				if (v.additional_bits_flag)
+				{
+					printf("%s %d\n", VALUE_6, v.additional_bits_for_size);
+					if (v.additional_bits_for_size == 1)
+					{
+						printf("Data size: %d\n", v.size_bytes);
+
+						printf("%s ", VALUE_5);
+						for (int a = 0; a < v.size_bytes; a++)
+							printf("0x%02X ", v.value[a]);
+						printf("\n");
+					}
+				}
+				else
+				{
+					printf("%s %d Bytes [%d]\n", VALUE_4, v.size_bytes, v.size_bytes);
+
+					printf("%s 0x", VALUE_5);
+					for (int a = 0; a < v.size_bytes; a++)
+						printf("%02X", v.value[a]);
+					printf("\n");
+				}
 			}
 		}
 
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("RECORD HANDLE: \n");
-			printATTR_ELEMENT();
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_0);
 
-			printVALUE_ELEMENT(v);
+				printATTR_ELEMENT(dd);
 
-			printf("\n");
+				printVALUE_ELEMENT(v, dd);
+
+
+				char test[100]{ 0 };
+				DWORD temp = 0x00;
+
+				temp |= v.value[0];
+				temp <<= 8;
+				temp |= v.value[1];
+				temp <<= 8;
+				temp |= v.value[2];
+				temp <<= 8;
+				temp |= v.value[3];
+				sprintf_s(test, "Record handle: 0x%08X\n", temp);
+				dd.outside_print_function(test);
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_0);
+				printATTR_ELEMENT(dd);
+
+				printVALUE_ELEMENT(v, dd);
+
+				printf("\n");
+			}
 		}
 
 	} DEFAULT_OBJECT, * PDEFAULT_OBJECT;
@@ -832,18 +1067,35 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("CLASS ID: \n");
-			printATTR_ELEMENT();
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_1);
 
-			printVALUE_ELEMENT(v);
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
 
-			// TODO: naredi tako da se bodo kreirali objekt za vsak class posebej, ker jih je v prihodnosti lahko vec
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+				for (int a = 0; a < VALUE.num_classes; a++)
+					sprintf_s(test, "%sClass ID [%d]: 0x%04X\n", test, a, VALUE.classes[a].value);
+				dd.outside_print_function(test);
+			}
+			else
+			{
 
-			for (int a = 0; a < VALUE.num_classes; a++)
-				printf("Class ID [%d]: 0x%04X\n", a, VALUE.classes[a].value);
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_1);
 
-			printf("\n");
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				// TODO: naredi tako da se bodo kreirali objekt za vsak class posebej, ker jih je v prihodnosti lahko vec
+
+				for (int a = 0; a < VALUE.num_classes; a++)
+					printf("Class ID [%d]: 0x%04X\n", a, VALUE.classes[a].value);
+
+				printf("\n");
+			}
 		}
 
 	} SERVICE_CLASS_ID_LIST, * PSERVICE_CLASS_ID_LIST;
@@ -863,124 +1115,275 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("PROTOCOL DESCRIPTOR LIST: \n");
-			
-			printATTR_ELEMENT();
-
-			printVALUE_ELEMENT(v);
-
-			for (int c = 0; c < VALUE.num_protocols; c++)
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
 			{
-				if (VALUE._BNEP_flag == 1 && c < (VALUE.num_protocols - 1))
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_2);
+
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+
+				for (int c = 0; c < VALUE.num_protocols; c++)
 				{
-					/* za vse protokole ki so BNEP  */
-					printf("Protocol [%d]:\n", c);
-
-					printf("\tValue: ");
-					for (int d = 0; d < VALUE.protocols[c].additional_bits_for_size; d++)
-						printf("0x%X ", VALUE.protocols[c].value[d]);
-					printf("\n");
-
-					printf("\tID [0x%04X][%s]\n", VALUE.protocols[c].protocol_id, SUB_FUNCTIONS::getProtocolTypeString(VALUE.protocols[c].protocol_id).c_str());
-					if (VALUE.protocols[c].additional_parameters_flag)
+					if (VALUE._BNEP_flag == 1 && c < (VALUE.num_protocols - 1))
 					{
-						if (dd.service_class_id_in_use == Handsfree ||
-							dd.service_class_id_in_use == Headset ||
-							dd.service_class_id_in_use == Headset_Audio_Gateway ||
-							dd.service_class_id_in_use == OBEXObjectPush ||
-							dd.service_class_id_in_use == OBEXFileTransfer ||
-							dd.service_class_id_in_use == SDP::HandsfreeAudioGateway ||
-							dd.service_class_id_in_use == SDP::Phonebook_Access_PSE ||
-							dd.service_class_id_in_use == SDP::Phonebook_Access ||
-							dd.service_class_id_in_use == SDP::Message_Access_Server ||
-							dd.service_class_id_in_use == SDP::Message_Access_Profile ||
-							dd.service_class_id_in_use == SDP::GenericAudio
-							)
-							printf("\tChannel number: %d\n", VALUE.protocols[c].pdsp->server_channel_num);
+						/* za vse protokole ki so BNEP  */
+						sprintf_s(test, "Protocol [%d]:\n", c);
+						dd.outside_print_function(test);
 
-						if (dd.service_class_id_in_use == AudioSource ||
-							dd.service_class_id_in_use == AudioSink ||
-							dd.service_class_id_in_use == A_V_RemoteControlTarget ||
-							dd.service_class_id_in_use == A_V_RemoteControl ||
-							dd.service_class_id_in_use == A_V_RemoteControlController ||
-							dd.service_class_id_in_use == PANU ||
-							dd.service_class_id_in_use == _NAP
-							)
+						sprintf_s(test, "\tValue: ");
+						for (int d = 0; d < VALUE.protocols[c].additional_bits_for_size; d++)
+							sprintf_s(test, "%s0x%X ", test, VALUE.protocols[c].value[d]);
+						dd.outside_print_function(test);
+						sprintf_s(test, "\n");
+						dd.outside_print_function(test);
+
+						sprintf_s(test, "\tID [0x%04X][%s]\n", VALUE.protocols[c].protocol_id, SUB_FUNCTIONS::getProtocolTypeString(VALUE.protocols[c].protocol_id).c_str());
+						dd.outside_print_function(test);
+						if (VALUE.protocols[c].additional_parameters_flag)
 						{
-							if (VALUE.protocols[c].protocol_id == _L2CAP)
-								printf("\tPSM: 0x%04X\n", VALUE.protocols[c].pdsp->PSM);
-
-							if (VALUE.protocols[c].protocol_id == _AVDTP ||
-								VALUE.protocols[c].protocol_id == _AVCTP ||
-								VALUE.protocols[c].protocol_id == _BNEP
+							if (dd.service_class_id_in_use == Handsfree ||
+								dd.service_class_id_in_use == Headset ||
+								dd.service_class_id_in_use == Headset_Audio_Gateway ||
+								dd.service_class_id_in_use == OBEXObjectPush ||
+								dd.service_class_id_in_use == OBEXFileTransfer ||
+								dd.service_class_id_in_use == SDP::HandsfreeAudioGateway ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access_PSE ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access ||
+								dd.service_class_id_in_use == SDP::Message_Access_Server ||
+								dd.service_class_id_in_use == SDP::Message_Access_Profile ||
+								dd.service_class_id_in_use == SDP::GenericAudio
 								)
-								printf("\tVersion: 0x%04X\n", VALUE.protocols[c].pdsp->Version);
-
-							if (VALUE.protocols[c].protocol_id == _BNEP)
 							{
-								printf("\tNumber of supported network packet type: %d\n", VALUE.protocols[c].pdsp->num_of_Supported_Network_Packet_Type_List_PANU);
-
-								for (int aaa = 0; aaa < VALUE.protocols[c].pdsp->num_of_Supported_Network_Packet_Type_List_PANU; aaa++)
-								{
-									printf("\tnetwork packet type [0x%04X][%s]\n", VALUE.protocols[c].pdsp->Supported_Network_Packet_Type_List[aaa], SUB_FUNCTIONS::getNetworkPacketTypeString(VALUE.protocols[c].pdsp->Supported_Network_Packet_Type_List[aaa]).c_str());
-								}
+								sprintf_s(test, "\tChannel number: %d\n", VALUE.protocols[c].pdsp->server_channel_num);
+								dd.outside_print_function(test);
 							}
 
-						}
-					}
-				}
-				else if (VALUE._BNEP_flag != 1)
-				{
-					/* za vse protokole ki niso BNEP */
-
-					printf("Protocol [%d]:\n", c);
-
-					printf("\tValue: ");
-					for (int d = 0; d < VALUE.protocols[c].additional_bits_for_size; d++)
-						printf("0x%X ", VALUE.protocols[c].value[d]);
-					printf("\n");
-
-					printf("\tID [0x%04X][%s]\n", VALUE.protocols[c].protocol_id, SUB_FUNCTIONS::getProtocolTypeString(VALUE.protocols[c].protocol_id).c_str());
-					if (VALUE.protocols[c].additional_parameters_flag)
-					{
-						if (dd.service_class_id_in_use == Handsfree ||
-							dd.service_class_id_in_use == Headset ||
-							dd.service_class_id_in_use == Headset_Audio_Gateway ||
-							dd.service_class_id_in_use == OBEXObjectPush ||
-							dd.service_class_id_in_use == OBEXFileTransfer ||
-							dd.service_class_id_in_use == SDP::HandsfreeAudioGateway ||
-							dd.service_class_id_in_use == SDP::Phonebook_Access_PSE ||
-							dd.service_class_id_in_use == SDP::Phonebook_Access ||
-							dd.service_class_id_in_use == SDP::Message_Access_Server ||
-							dd.service_class_id_in_use == SDP::Message_Access_Profile ||
-							dd.service_class_id_in_use == SDP::GenericAudio
-							)
-							printf("\tChannel number: %d\n", VALUE.protocols[c].pdsp->server_channel_num);
-
-						if (dd.service_class_id_in_use == AudioSource ||
-							dd.service_class_id_in_use == AudioSink ||
-							dd.service_class_id_in_use == A_V_RemoteControlTarget ||
-							dd.service_class_id_in_use == A_V_RemoteControl ||
-							dd.service_class_id_in_use == A_V_RemoteControlController ||
-							dd.service_class_id_in_use == PANU ||
-							dd.service_class_id_in_use == _NAP
-							)
-						{
-							if (VALUE.protocols[c].protocol_id == _L2CAP)
-								printf("\tPSM: 0x%04X\n", VALUE.protocols[c].pdsp->PSM);
-
-							if (VALUE.protocols[c].protocol_id == _AVDTP ||
-								VALUE.protocols[c].protocol_id == _AVCTP ||
-								VALUE.protocols[c].protocol_id == _BNEP
+							if (dd.service_class_id_in_use == AudioSource ||
+								dd.service_class_id_in_use == AudioSink ||
+								dd.service_class_id_in_use == A_V_RemoteControlTarget ||
+								dd.service_class_id_in_use == A_V_RemoteControl ||
+								dd.service_class_id_in_use == A_V_RemoteControlController ||
+								dd.service_class_id_in_use == PANU ||
+								dd.service_class_id_in_use == _NAP
 								)
-								printf("\tVersion: 0x%04X\n", VALUE.protocols[c].pdsp->Version);
+							{
+								if (VALUE.protocols[c].protocol_id == _L2CAP)
+								{
+									sprintf_s(test, "\tPSM: 0x%04X\n", VALUE.protocols[c].pdsp->PSM);
+									dd.outside_print_function(test);
+								}
+
+								if (VALUE.protocols[c].protocol_id == _AVDTP ||
+									VALUE.protocols[c].protocol_id == _AVCTP ||
+									VALUE.protocols[c].protocol_id == _BNEP
+									)
+								{
+									sprintf_s(test, "\tVersion: 0x%04X\n", VALUE.protocols[c].pdsp->Version);
+									dd.outside_print_function(test);
+								}
+
+								if (VALUE.protocols[c].protocol_id == _BNEP)
+								{
+									sprintf_s(test, "\tNumber of supported network packet type: %d\n", VALUE.protocols[c].pdsp->num_of_Supported_Network_Packet_Type_List_PANU);
+									dd.outside_print_function(test);
+
+									for (int aaa = 0; aaa < VALUE.protocols[c].pdsp->num_of_Supported_Network_Packet_Type_List_PANU; aaa++)
+									{
+										sprintf_s(test, "\tnetwork packet type [0x%04X][%s]\n", VALUE.protocols[c].pdsp->Supported_Network_Packet_Type_List[aaa], SUB_FUNCTIONS::getNetworkPacketTypeString(VALUE.protocols[c].pdsp->Supported_Network_Packet_Type_List[aaa]).c_str());
+										dd.outside_print_function(test);
+									}
+								}
+
+							}
+						}
+					}
+					else if (VALUE._BNEP_flag != 1)
+					{
+						/* za vse protokole ki niso BNEP */
+						sprintf_s(test, "Protocol [%d]:\n", c);
+						dd.outside_print_function(test);
+
+						sprintf_s(test, "\tValue: ");
+						for (int d = 0; d < VALUE.protocols[c].additional_bits_for_size; d++)
+							sprintf_s(test, "%s0x%X ", test, VALUE.protocols[c].value[d]);
+						sprintf_s(test, "%s\n",test);
+						dd.outside_print_function(test);
+
+						sprintf_s(test, "\tID [0x%04X][%s]\n", VALUE.protocols[c].protocol_id, SUB_FUNCTIONS::getProtocolTypeString(VALUE.protocols[c].protocol_id).c_str());
+						dd.outside_print_function(test);
+						if (VALUE.protocols[c].additional_parameters_flag)
+						{
+							if (dd.service_class_id_in_use == Handsfree ||
+								dd.service_class_id_in_use == Headset ||
+								dd.service_class_id_in_use == Headset_Audio_Gateway ||
+								dd.service_class_id_in_use == OBEXObjectPush ||
+								dd.service_class_id_in_use == OBEXFileTransfer ||
+								dd.service_class_id_in_use == SDP::HandsfreeAudioGateway ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access_PSE ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access ||
+								dd.service_class_id_in_use == SDP::Message_Access_Server ||
+								dd.service_class_id_in_use == SDP::Message_Access_Profile ||
+								dd.service_class_id_in_use == SDP::GenericAudio
+								)
+							{
+								sprintf_s(test, "\tChannel number: %d\n", VALUE.protocols[c].pdsp->server_channel_num);
+								dd.outside_print_function(test);
+							}
+
+							if (dd.service_class_id_in_use == AudioSource ||
+								dd.service_class_id_in_use == AudioSink ||
+								dd.service_class_id_in_use == A_V_RemoteControlTarget ||
+								dd.service_class_id_in_use == A_V_RemoteControl ||
+								dd.service_class_id_in_use == A_V_RemoteControlController ||
+								dd.service_class_id_in_use == PANU ||
+								dd.service_class_id_in_use == _NAP
+								)
+							{
+								if (VALUE.protocols[c].protocol_id == _L2CAP)
+								{
+									sprintf_s(test, "\tPSM: 0x%04X\n", VALUE.protocols[c].pdsp->PSM);
+									dd.outside_print_function(test);
+								}
+
+								if (VALUE.protocols[c].protocol_id == _AVDTP ||
+									VALUE.protocols[c].protocol_id == _AVCTP ||
+									VALUE.protocols[c].protocol_id == _BNEP
+									)
+								{
+									sprintf_s(test, "\tVersion: 0x % 04X\n", VALUE.protocols[c].pdsp->Version);
+									dd.outside_print_function(test);
+								}
+							}
 						}
 					}
 				}
-			}
 
-			printf("\n");
+				printf("\n");
+
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_2);
+
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				for (int c = 0; c < VALUE.num_protocols; c++)
+				{
+					if (VALUE._BNEP_flag == 1 && c < (VALUE.num_protocols - 1))
+					{
+						/* za vse protokole ki so BNEP  */
+						printf("Protocol [%d]:\n", c);
+
+						printf("\tValue: ");
+						for (int d = 0; d < VALUE.protocols[c].additional_bits_for_size; d++)
+							printf("0x%X ", VALUE.protocols[c].value[d]);
+						printf("\n");
+
+						printf("\tID [0x%04X][%s]\n", VALUE.protocols[c].protocol_id, SUB_FUNCTIONS::getProtocolTypeString(VALUE.protocols[c].protocol_id).c_str());
+						if (VALUE.protocols[c].additional_parameters_flag)
+						{
+							if (dd.service_class_id_in_use == Handsfree ||
+								dd.service_class_id_in_use == Headset ||
+								dd.service_class_id_in_use == Headset_Audio_Gateway ||
+								dd.service_class_id_in_use == OBEXObjectPush ||
+								dd.service_class_id_in_use == OBEXFileTransfer ||
+								dd.service_class_id_in_use == SDP::HandsfreeAudioGateway ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access_PSE ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access ||
+								dd.service_class_id_in_use == SDP::Message_Access_Server ||
+								dd.service_class_id_in_use == SDP::Message_Access_Profile ||
+								dd.service_class_id_in_use == SDP::GenericAudio
+								)
+								printf("\tChannel number: %d\n", VALUE.protocols[c].pdsp->server_channel_num);
+
+							if (dd.service_class_id_in_use == AudioSource ||
+								dd.service_class_id_in_use == AudioSink ||
+								dd.service_class_id_in_use == A_V_RemoteControlTarget ||
+								dd.service_class_id_in_use == A_V_RemoteControl ||
+								dd.service_class_id_in_use == A_V_RemoteControlController ||
+								dd.service_class_id_in_use == PANU ||
+								dd.service_class_id_in_use == _NAP
+								)
+							{
+								if (VALUE.protocols[c].protocol_id == _L2CAP)
+									printf("\tPSM: 0x%04X\n", VALUE.protocols[c].pdsp->PSM);
+
+								if (VALUE.protocols[c].protocol_id == _AVDTP ||
+									VALUE.protocols[c].protocol_id == _AVCTP ||
+									VALUE.protocols[c].protocol_id == _BNEP
+									)
+									printf("\tVersion: 0x%04X\n", VALUE.protocols[c].pdsp->Version);
+
+								if (VALUE.protocols[c].protocol_id == _BNEP)
+								{
+									printf("\tNumber of supported network packet type: %d\n", VALUE.protocols[c].pdsp->num_of_Supported_Network_Packet_Type_List_PANU);
+
+									for (int aaa = 0; aaa < VALUE.protocols[c].pdsp->num_of_Supported_Network_Packet_Type_List_PANU; aaa++)
+									{
+										printf("\tnetwork packet type [0x%04X][%s]\n", VALUE.protocols[c].pdsp->Supported_Network_Packet_Type_List[aaa], SUB_FUNCTIONS::getNetworkPacketTypeString(VALUE.protocols[c].pdsp->Supported_Network_Packet_Type_List[aaa]).c_str());
+									}
+								}
+
+							}
+						}
+					}
+					else if (VALUE._BNEP_flag != 1)
+					{
+						/* za vse protokole ki niso BNEP */
+
+						printf("Protocol [%d]:\n", c);
+
+						printf("\tValue: ");
+						for (int d = 0; d < VALUE.protocols[c].additional_bits_for_size; d++)
+							printf("0x%X ", VALUE.protocols[c].value[d]);
+						printf("\n");
+
+						printf("\tID [0x%04X][%s]\n", VALUE.protocols[c].protocol_id, SUB_FUNCTIONS::getProtocolTypeString(VALUE.protocols[c].protocol_id).c_str());
+						if (VALUE.protocols[c].additional_parameters_flag)
+						{
+							if (dd.service_class_id_in_use == Handsfree ||
+								dd.service_class_id_in_use == Headset ||
+								dd.service_class_id_in_use == Headset_Audio_Gateway ||
+								dd.service_class_id_in_use == OBEXObjectPush ||
+								dd.service_class_id_in_use == OBEXFileTransfer ||
+								dd.service_class_id_in_use == SDP::HandsfreeAudioGateway ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access_PSE ||
+								dd.service_class_id_in_use == SDP::Phonebook_Access ||
+								dd.service_class_id_in_use == SDP::Message_Access_Server ||
+								dd.service_class_id_in_use == SDP::Message_Access_Profile ||
+								dd.service_class_id_in_use == SDP::GenericAudio
+								)
+								printf("\tChannel number: %d\n", VALUE.protocols[c].pdsp->server_channel_num);
+
+							if (dd.service_class_id_in_use == AudioSource ||
+								dd.service_class_id_in_use == AudioSink ||
+								dd.service_class_id_in_use == A_V_RemoteControlTarget ||
+								dd.service_class_id_in_use == A_V_RemoteControl ||
+								dd.service_class_id_in_use == A_V_RemoteControlController ||
+								dd.service_class_id_in_use == PANU ||
+								dd.service_class_id_in_use == _NAP
+								)
+							{
+								if (VALUE.protocols[c].protocol_id == _L2CAP)
+									printf("\tPSM: 0x%04X\n", VALUE.protocols[c].pdsp->PSM);
+
+								if (VALUE.protocols[c].protocol_id == _AVDTP ||
+									VALUE.protocols[c].protocol_id == _AVCTP ||
+									VALUE.protocols[c].protocol_id == _BNEP
+									)
+									printf("\tVersion: 0x%04X\n", VALUE.protocols[c].pdsp->Version);
+							}
+						}
+					}
+				}
+
+				printf("\n");
+			}
 		}
 
 	} PROTOCOL_DESCRIPTOR_LIST, * PPROTOCOL_DESCRIPTOR_LIST;
@@ -996,15 +1399,29 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("SERVICE NAME: \n");
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_3);
 
-			printATTR_ELEMENT();
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
 
-			printVALUE_ELEMENT(v);
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+				sprintf_s(test, "Service name: %s\n", v.service_name);
+				dd.outside_print_function(test);
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_3);
 
-			printf("Service name: %s\n", v.service_name);
-			printf("\n");
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				printf("Service name: %s\n", v.service_name);
+				printf("\n");
+			}
 		}
 
 	} SERVICE_NAME, * PSERVICE_NAME;
@@ -1020,15 +1437,29 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("PROVIDER NAME: \n");
-			
-			printATTR_ELEMENT();
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_4);
 
-			printVALUE_ELEMENT(v);
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
 
-			printf("Provider name: %s\n", v.provider_name);
-			printf("\n");
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+				sprintf_s(test, "Provider name: %s\n", v.provider_name);
+				dd.outside_print_function(test);
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_4);
+
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				printf("Provider name: %s\n", v.provider_name);
+				printf("\n");
+			}
 		}
 
 	} PROVIDER_NAME, * PPROVIDER_NAME;
@@ -1050,16 +1481,32 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("BLUETOOTH PROFILE DESCRIPTOR LIST: \n");
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_5);
 
-			printATTR_ELEMENT();
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
 
-			printVALUE_ELEMENT(v);
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+				sprintf_s(test, "Profile UUID: 0x%04X\n", VALUE.profile_UUID);
+				dd.outside_print_function(test);
+				sprintf_s(test, "Profile version: 0x%04X\n", VALUE.profile_version);
+				dd.outside_print_function(test);
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_5);
 
-			printf("Profile UUID: 0x%04X\n", VALUE.profile_UUID);
-			printf("Profile version: 0x%04X\n", VALUE.profile_version);
-			printf("\n");
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				printf("Profile UUID: 0x%04X\n", VALUE.profile_UUID);
+				printf("Profile version: 0x%04X\n", VALUE.profile_version);
+				printf("\n");
+			}
 		}
 
 	} BLUETOOTH_PROFILE_DESCRIPTOR_LIST, * PBLUETOOTH_PROFILE_DESCRIPTOR_LIST;
@@ -1078,16 +1525,36 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("LANGUAGE ATTRIBUTE ID LIST: \n");
-			printATTR_ELEMENT();
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_6);
 
-			printVALUE_ELEMENT(v);
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
 
-			printf("Natural language ID: 0x%04X\n", VALUE.triplet_id_natural_lang);
-			printf("Character encoding ID: 0x%04X\n", VALUE.triplet_id_char_encoding);
-			printf("Attribute ID: 0x%04X\n", VALUE.triplet_attribute_id);
-			printf("\n");
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+				sprintf_s(test, "Natural language ID: 0x%04X\n", VALUE.triplet_id_natural_lang);
+				dd.outside_print_function(test);
+				sprintf_s(test, "Character encoding ID: 0x%04X\n", VALUE.triplet_id_char_encoding);
+				dd.outside_print_function(test);
+				sprintf_s(test, "Attribute ID: 0x%04X\n", VALUE.triplet_attribute_id);
+				dd.outside_print_function(test);
+
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_6);
+
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				printf("Natural language ID: 0x%04X\n", VALUE.triplet_id_natural_lang);
+				printf("Character encoding ID: 0x%04X\n", VALUE.triplet_id_char_encoding);
+				printf("Attribute ID: 0x%04X\n", VALUE.triplet_attribute_id);
+				printf("\n");
+			}
 		}
 
 	} LANGUAGE_BASE_ATTRIBUTE_ID_LIST, * PLANGUAGE_BASE_ATTRIBUTE_ID_LIST;
@@ -1103,15 +1570,29 @@ namespace SDP
 		template<class T>
 		void print(T v, IOCTL_S::DEFAULT_DATA dd)
 		{
-			printf("*************************************************\n");
-			printf("SERVICE DESCRIPTION: \n");
+			if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+			{
+				dd.outside_print_function(DELIMITER_PRINT);
+				dd.outside_print_function(ATTR_NAME_7);
 
-			printATTR_ELEMENT();
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
 
-			printVALUE_ELEMENT(v);
+				char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+				sprintf_s(test, "Description: %s\n", v.description);
+				dd.outside_print_function(test);
+			}
+			else
+			{
+				printf(DELIMITER_PRINT);
+				printf(ATTR_NAME_7);
 
-			printf("Description: %s\n", v.description);
-			printf("\n");
+				printATTR_ELEMENT(dd);
+				printVALUE_ELEMENT(v, dd);
+
+				printf("Description: %s\n", v.description);
+				printf("\n");
+			}
 		}
 
 	} SERVICE_DESCRIPTION, * PSERVICE_DESCRIPTION;
@@ -1187,20 +1668,23 @@ namespace SDP
 
 			// TODO: bolje preimenuj, da bo bolj razumljivo
 			int flag;
+			DWORD sf_s_value;
+			BYTE smt_s_value;
 
-			SUPPORTED_FEATURES_MESSAGES_S(BYTE* a) : ttt((SMT_S*)a)
+			SUPPORTED_FEATURES_MESSAGES_S(int i, DWORD a1, BYTE a2)
 			{
-				//printf("FROM STRUCT --> %X\n", *a);
-				flag = 0;
+				if (i == 1)
+				{
+					sf_s_value = a1;
+
+					aaa = (SF_S*)&sf_s_value;
+				}
+				else
+				{
+					smt_s_value = a2;
+					ttt = (SMT_S*)&smt_s_value;
+				}
 			};
-
-			SUPPORTED_FEATURES_MESSAGES_S(DWORD* a) : aaa((SF_S*)a)
-			{
-				//printf("FROM STRUCT --> %X\n", *a);
-				flag = 1;
-			};
-
-
 		};
 
 
@@ -1218,16 +1702,30 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("GOEPL2CAPPSM: \n");
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_8);
 
-				printATTR_ELEMENT();
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printVALUE_ELEMENT(v);
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "GoepL2CapPsm value: 0x%04X\n", v.GoepL2CapPsm_value);
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_8);
 
-				printf("GoepL2CapPsm value: 0x%04X\n", v.GoepL2CapPsm_value);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("\n");
+					printf("GoepL2CapPsm value: 0x%04X\n", v.GoepL2CapPsm_value);
+
+					printf("\n");
+				}
 			}
 
 
@@ -1244,16 +1742,31 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SUPPORTED MESSAGE TYPES: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_10);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Message types: \n%s\n", getMessageTypesString(VALUE.sfm).c_str());
+					std::string temp_s = "Message types: \n";
+					temp_s.append(getMessageTypesString(VALUE.sfm));
+					temp_s.append("\n");
+					dd.outside_print_function(temp_s);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_10);
 
-				printf("\n");
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Message types: \n%s\n", getMessageTypesString(VALUE.sfm).c_str());
+
+					printf("\n");
+				}
 			}
 
 
@@ -1270,16 +1783,30 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("MAS INSTACE ID: \n");
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_11);
 
-				printATTR_ELEMENT();
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printVALUE_ELEMENT(v);
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "MAS instance ID: 0x%02X\n", v.instance_ID);
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_11);
 
-				printf("MAS instance ID: 0x%02X\n", v.instance_ID);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("\n");
+					printf("MAS instance ID: 0x%02X\n", v.instance_ID);
+
+					printf("\n");
+				}
 			}
 
 		} MAS_INSTANCE_ID, * PMAS_INSTANCE_ID;
@@ -1295,15 +1822,30 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("MAP SUPPORTED FEATURES: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_12);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Features: \n%s\n", getSupportedFeaturesString(v.sfm).c_str());
-				printf("\n");
+					std::string temp_s = "Features: \n";
+					temp_s.append(getSupportedFeaturesString(v.sfm));
+					temp_s.append("\n");
+					dd.outside_print_function(temp_s);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_12);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Features: \n%s\n", getSupportedFeaturesString(v.sfm).c_str());
+					printf("\n");
+				}
 			}
 
 		} MAP_SUPPORTED_FEATURES, * PMAP_SUPPORTED_FEATURES;
@@ -1386,17 +1928,34 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SUPORTED FEATURES: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_9);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
 
-				printf("Supported features: 0x%04X\n", v.supported_features_value);
-				printf("%s\n", v.sfds->getSupportedFeaturesString().c_str());
+					char test[100]{ 0 };
+					sprintf_s(test, "%s 0x%04X\n", VALUE_7, v.supported_features_value);
+					dd.outside_print_function(test);
 
+					sprintf_s(test, "%s\n", v.sfds->getSupportedFeaturesString().c_str());
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_9);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+
+					printf("%s 0x%04X\n", VALUE_7, v.supported_features_value);
+					printf("%s\n", v.sfds->getSupportedFeaturesString().c_str());
+				}
 			}
 
 		} SUPPORTED_FEATURES, * PSUPPORTED_FEATURES;
@@ -1449,17 +2008,19 @@ namespace SDP
 			AVRCT_S* avrct;
 			AVRC_AVRCC_S* avrc_avrcc;
 
-			SUPPORTED_FEATURES_DATA_S(SHORT* a, int type) //: avrct((AVRCT_S*)a)
+			SUPPORTED_FEATURES_DATA_S(SHORT* a, int type)
 			{
 				avrct = NULL;
 				avrc_avrcc = NULL;
 
 				if (type == 1)
+				{
 					avrct = (AVRCT_S*)a;
+				}
 				else
+				{
 					avrc_avrcc = (AVRC_AVRCC_S*)a;
-
-				//printf("FROM STRUCT --> %X\n", *a);
+				}
 			};
 
 			std::string getSupportedFeaturesString_AVRC_AVRCC()
@@ -1468,42 +2029,42 @@ namespace SDP
 
 				if (avrc_avrcc->a0)
 				{
-					temp += "Category 1\n";
+					temp.append("Category 1\n");
 				}
 
 				if (avrc_avrcc->a1)
 				{
-					temp += "Category 2\n";
+					temp.append("Category 2\n");
 				}
 
 				if (avrc_avrcc->a2)
 				{
-					temp += "Category 3\n";
+					temp.append("Category 3\n");
 				}
 
 				if (avrc_avrcc->a3)
 				{
-					temp += "Category 4\n";
+					temp.append("Category 4\n");
 				}
 
 				if (avrc_avrcc->a6)
 				{
-					temp += "Supports browsing\n";
+					temp.append("Supports browsing\n");
 				}
 
 				if (avrc_avrcc->a7)
 				{
-					temp += "Supports Cover Art GetImageProperties feature\n";
+					temp.append("Supports Cover Art GetImageProperties feature\n");
 				}
 
 				if (avrc_avrcc->a8)
 				{
-					temp += " Supports Cover Art GetImage feature\n";
+					temp.append("Supports Cover Art GetImage feature\n");
 				}
 
 				if (avrc_avrcc->a9)
 				{
-					temp += "Supports Cover Art GetLinkedThumbnail feature\n";
+					temp.append("Supports Cover Art GetLinkedThumbnail feature\n");
 				}
 
 				return temp;
@@ -1515,47 +2076,47 @@ namespace SDP
 
 				if (avrct->a0)
 				{
-					temp += "Category 1\n";
+					temp.append("Category 1\n");
 				}
 
 				if (avrct->a1)
 				{
-					temp += "Category 2\n";
+					temp.append("Category 2\n");
 				}
 
 				if (avrct->a2)
 				{
-					temp += "Category 3\n";
+					temp.append("Category 3\n");
 				}
 
 				if (avrct->a3)
 				{
-					temp += "Category 4\n";
+					temp.append("Category 4\n");
 				}
 
 				if (avrct->a4)
 				{
-					temp += "Player Application Settings\n";
+					temp.append("Player Application Settings\n");
 				}
 
 				if (avrct->a5)
 				{
-					temp += "Group Navigation\n";
+					temp.append("Group Navigation\n");
 				}
 
 				if (avrct->a6)
 				{
-					temp += "Supports browsing\n";
+					temp.append("Supports browsing\n");
 				}
 
 				if (avrct->a7)
 				{
-					temp += "Supports multiple media player applications\n";
+					temp.append("Supports multiple media player applications\n");
 				}
 
 				if (avrct->a8)
 				{
-					temp += "Supports Cover Art\n";
+					temp.append("Supports Cover Art\n");
 				}
 
 				return temp;
@@ -1576,27 +2137,59 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SUPPORTED FEATURES: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_9);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "%s 0x%04X\n", VALUE_7, v.supported_features_value);
+					dd.outside_print_function(test);
 
-				printf("Supported features: 0x%04X\n", v.supported_features_value);
+					// TODO: najdi boljso resitev, ker se pri klicu printVALUE_ELEMENT() value spremeni na random
+					v.sfds->avrct = (SUPPORTED_FEATURES_DATA_S::AVRCT_S*)&v.supported_features_value;
 
-				// TODO: premisli kako bi to naredil da se data pravilno izpise
-				if (v.sfds->avrct != NULL)
-					printf("%s\n", v.sfds->getSupportedFeaturesString_AVRCT().c_str());
+					if (dd.temp_class_id == SDP::A_V_RemoteControlTarget)
+					{
+						sprintf_s(test, "%s\n", v.sfds->getSupportedFeaturesString_AVRCT().c_str());
+						dd.outside_print_function(test);
+					}
 
-				if (v.sfds->avrc_avrcc != NULL)
-					printf("%s\n", v.sfds->getSupportedFeaturesString_AVRC_AVRCC().c_str());
+					if (dd.temp_class_id == SDP::A_V_RemoteControl ||
+						dd.temp_class_id == SDP::A_V_RemoteControlController
+					)
+					{
+						sprintf_s(test, "%s\n", v.sfds->getSupportedFeaturesString_AVRC_AVRCC().c_str());
+						dd.outside_print_function(test);
+					}
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_9);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("%s 0x%04X\n", VALUE_7, v.supported_features_value);
+
+					// TODO: najdi boljso resitev, ker se pri klicu printVALUE_ELEMENT() value spremeni na random
+					v.sfds->avrct = (SUPPORTED_FEATURES_DATA_S::AVRCT_S*)&v.supported_features_value;
+
+					if (dd.temp_class_id == SDP::A_V_RemoteControlTarget)
+						printf("%s\n", v.sfds->getSupportedFeaturesString_AVRCT().c_str());
+
+					if (dd.temp_class_id == SDP::A_V_RemoteControl ||
+						dd.temp_class_id == SDP::A_V_RemoteControlController
+						)
+						printf("%s\n", v.sfds->getSupportedFeaturesString_AVRC_AVRCC().c_str());
+				}
 			}
 
 		} SUPPORTED_FEATURES, * PSUPPORTED_FEATURES;
-
-
 
 		typedef struct AVRCP_EXPORT_S
 		{
@@ -1605,7 +2198,6 @@ namespace SDP
 			PSUPPORTED_FEATURES supported_features_handle_export;
 
 		} AVRCP_EXPORT, * PAVRCP_EXPORT;
-
 	}
 
 	namespace HFP
@@ -1628,9 +2220,12 @@ namespace SDP
 
 			SR_S* repo;
 
-			SUPPORTED_FEATURES_DATA_S(SHORT* a) : repo((SR_S*)a)
+			SHORT temp_data;
+
+			SUPPORTED_FEATURES_DATA_S(SHORT a)
 			{
-				//printf("FROM STRUCT --> %X\n", *a);
+				temp_data = a;
+				repo = (SR_S*)&temp_data;
 			};
 
 			std::string getSupportedFeatures_AG_String()
@@ -1639,42 +2234,42 @@ namespace SDP
 
 				if (repo->a0)
 				{
-					temp += "Three-way calling\n";
+					temp.append("Three-way calling\n");
 				}
 
 				if (repo->a1)
 				{
-					temp += "EC and/or NR function\n";
+					temp.append("EC and/or NR function\n");
 				}
 
 				if (repo->a2)
 				{
-					temp += "Voice recognition function\n";
+					temp.append("Voice recognition function\n");
 				}
 
 				if (repo->a3)
 				{
-					temp += "In-band ring tone capability\n";
+					temp.append("In-band ring tone capability\n");
 				}
 
 				if (repo->a4)
 				{
-					temp += "Attach a phone number to a voice tag\n";
+					temp.append("Attach a phone number to a voice tag\n");
 				}
 
 				if (repo->a5)
 				{
-					temp += "Wide band speech\n";
+					temp.append("Wide band speech\n");
 				}
 
 				if (repo->a6)
 				{
-					temp += "Enhanced Voice Recognition Status \n";
+					temp.append("Enhanced Voice Recognition Status \n");
 				}
 
 				if (repo->a7)
 				{
-					temp += "Voice Recognition Text\n";
+					temp.append("Voice Recognition Text\n");
 				}
 
 				return temp;
@@ -1733,15 +2328,35 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("NETWORK: \n");
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_13);
 
-				printATTR_ELEMENT();
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printVALUE_ELEMENT(v);
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Network: %s\n", v.value[0] == 0x01 ? "Ability to reject a call" : "No ability to reject a call");
+					dd.outside_print_function(test);
 
-				printf("Network: %s\n", v.value[0] == 0x01 ? "Ability to reject a call" : "No ability to reject a call");
-				printf("\n");
+					//printf("Network: %s\n", v.value[0] == 0x01 ? "Ability to reject a call" : "No ability to reject a call");
+					sprintf_s(test, "\n");
+					dd.outside_print_function(test);
+					//printf("\n");
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_13);
+
+					printATTR_ELEMENT(dd);
+
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Network: %s\n", v.value[0] == 0x01 ? "Ability to reject a call" : "No ability to reject a call");
+					printf("\n");
+				}
 			}
 
 		} NETWORK, * PNETWORK;
@@ -1759,17 +2374,48 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SUPPORTED FEATURES: \n");
 				
-				printATTR_ELEMENT();
+				
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_9);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				// TODO: naredi da bo tudi za brez AG (trenutno narejeno samo za AG)
-				printf("Supported features: 0x%04X\n", v.supported_features_value);
-				printf("%s\n", v.sfds->getSupportedFeatures_AG_String().c_str());
-				printf("\n");
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Supported features: 0x%04X\n", v.supported_features_value);
+					dd.outside_print_function(test);
+
+					if (dd.temp_service == SDP::HandsfreeAudioGateway)
+					{
+						sprintf_s(test, "%s\n", v.sfds->getSupportedFeatures_AG_String().c_str());
+						dd.outside_print_function(test);
+					}
+					else
+					{
+						sprintf_s(test, "%s\n", v.sfds->getSupportedFeaturesString().c_str());
+						dd.outside_print_function(test);
+					}
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_9);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Supported features: 0x%04X\n", v.supported_features_value);
+
+					if (dd.temp_service == SDP::HandsfreeAudioGateway)
+						printf("%s\n", v.sfds->getSupportedFeatures_AG_String().c_str());
+					else
+						printf("%s\n", v.sfds->getSupportedFeaturesString().c_str());
+					
+					printf("\n");
+				}
 			}
 
 		} SUPPORTED_FEATURES, * PSUPPORTED_FEATURES;
@@ -1792,13 +2438,24 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("REMOTE AUDIO VOLUME CONTROL: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_14);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
 
+					printVALUE_ELEMENT(v, dd);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_14);
+
+					printATTR_ELEMENT(dd);
+
+					printVALUE_ELEMENT(v, dd);
+				}
 				// TODO: najdi primer za parsanje
 			}
 
@@ -1829,16 +2486,29 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SECURITY DESCRIPTION: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_15);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Security Description [0x%04X][%s]\n", VALUE.security_value, getSecurityDescriptionString(VALUE.security_value).c_str());
-				printf("\n");
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Security Description [0x%04X][%s]\n", VALUE.security_value, getSecurityDescriptionString(VALUE.security_value).c_str());
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_15);
 
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Security Description [0x%04X][%s]\n", VALUE.security_value, getSecurityDescriptionString(VALUE.security_value).c_str());
+					printf("\n");
+				}
 			}
 
 		} SECURITY_DESCRIPTION, * PSECURITY_DESCRIPTION;
@@ -1853,15 +2523,30 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("NET ACCESS TYPE: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_16);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Type of Network Access Available[0x%04X][%s]\n", VALUE.NetAccessType, getNetAccessTypeString(VALUE.NetAccessType).c_str());
-				printf("\n");
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Type of Network Access Available[0x%04X][%s]\n", VALUE.NetAccessType, getNetAccessTypeString(VALUE.NetAccessType).c_str());
+					dd.outside_print_function(test);
+				}
+				else
+				{
+
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_16);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Type of Network Access Available[0x%04X][%s]\n", VALUE.NetAccessType, getNetAccessTypeString(VALUE.NetAccessType).c_str());
+					printf("\n");
+				}
 			}
 
 		} NET_ACCESS_TYPE, * PNET_ACCESS_TYPE;
@@ -1876,15 +2561,29 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("MAX NET ACCESS RATE: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_17);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Maximum possible Network Access Data Rate: 0x%08X\n", VALUE.Maximum_possible_Network_Access_Data_Rate);
-				printf("\n");
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Maximum possible Network Access Data Rate: 0x%08X\n", VALUE.Maximum_possible_Network_Access_Data_Rate);
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_17);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Maximum possible Network Access Data Rate: 0x%08X\n", VALUE.Maximum_possible_Network_Access_Data_Rate);
+					printf("\n");
+				}
 			}
 
 		} MAX_NET_ACCESS_RATE, * PMAX_NET_ACCESS_RATE;
@@ -1906,7 +2605,7 @@ namespace SDP
 
 		typedef struct SERVICE_VERSION_S : DEFAULT_OBJECT
 		{
-
+			// TODO: ko bo default object urejene tako da bo zares default bo v redu, trenutno pa javi kot record handle!!!
 		} SERVICE_VERSION, * PSERVICE_VERSION;
 
 		typedef struct SUPPORTED_FORMATS_S : DEFAULT_OBJECT
@@ -1921,21 +2620,48 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SUPPORTED FORMATS: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_18);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Number of supported formats: %d\n", v.num_of_formats);
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Number of supported formats: %d\n", v.num_of_formats);
+					dd.outside_print_function(test);
 
-				printf("Supported formats: \n");
-				for (int aa = 0; aa < v.num_of_formats; aa++)
-					printf("0x%02X ", v.formats[aa]);
-				printf("\n");
+					sprintf_s(test, "Supported formats: \n");
+					dd.outside_print_function(test);
 
-				printf("Formats: \n%s\n", getSupportedFormatsString(v.formats, v.num_of_formats).c_str());
+					sprintf_s(test, "");
+					for (int aa = 0; aa < v.num_of_formats; aa++)
+						sprintf_s(test, "%s0x%02X ", test, v.formats[aa]);
+					dd.outside_print_function(test);
+
+
+					sprintf_s(test, "Formats: \n%s\n", getSupportedFormatsString(v.formats, v.num_of_formats).c_str());
+					dd.outside_print_function(test);
+				}
+				else
+				{
+
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_18);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Number of supported formats: %d\n", v.num_of_formats);
+
+					printf("Supported formats: \n");
+					for (int aa = 0; aa < v.num_of_formats; aa++)
+						printf("0x%02X ", v.formats[aa]);
+					printf("\n");
+
+					printf("Formats: \n%s\n", getSupportedFormatsString(v.formats, v.num_of_formats).c_str());
+				}
 			}
 
 		} SUPPORTED_FORMATS, * PSUPPORTED_FORMATS;
@@ -2011,14 +2737,28 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("SUPPORTED REPOSITORIES: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_19);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Repositories: \n%s\n", v.srs->getSupportedRepositoriesString().c_str());
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Repositories: \n%s\n", v.srs->getSupportedRepositoriesString().c_str());
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_19);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Repositories: \n%s\n", v.srs->getSupportedRepositoriesString().c_str());
+				}
 			}
 
 		} SUPPORTED_REPOSITORIES, * PSUPPORTED_REPOSITORIES;
@@ -2029,12 +2769,22 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("PBAP SUPPORTED FEATURES: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_20);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_20);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+				}
 			}
 
 
@@ -2067,28 +2817,28 @@ namespace SDP
 			{
 				switch (id)
 				{
-				case ATTRIBUTE_ID_DEVICE_SDP::SpecificationID:
-					this->SpecificationID = data;
+					case ATTRIBUTE_ID_DEVICE_SDP::SpecificationID:
+						this->SpecificationID = data;
 					break;
 
-				case ATTRIBUTE_ID_DEVICE_SDP::VendorID:
-					this->VendorID = data;
+					case ATTRIBUTE_ID_DEVICE_SDP::VendorID:
+						this->VendorID = data;
 					break;
 
-				case ATTRIBUTE_ID_DEVICE_SDP::ProductID:
-					this->ProductID = data;
+					case ATTRIBUTE_ID_DEVICE_SDP::ProductID:
+						this->ProductID = data;
 					break;
 
-				case ATTRIBUTE_ID_DEVICE_SDP::Version:
-					this->Version = data;
+					case ATTRIBUTE_ID_DEVICE_SDP::Version:
+						this->Version = data;
 					break;
 
-				case ATTRIBUTE_ID_DEVICE_SDP::PrimaryRecord:
-					this->PrimaryRecord = data;
+					case ATTRIBUTE_ID_DEVICE_SDP::PrimaryRecord:
+						this->PrimaryRecord = data;
 					break;
 
-				case ATTRIBUTE_ID_DEVICE_SDP::VendorIDSource:
-					this->VendorIDSource = data;
+					case ATTRIBUTE_ID_DEVICE_SDP::VendorIDSource:
+						this->VendorIDSource = data;
 					break;
 				}
 			}
@@ -2097,19 +2847,48 @@ namespace SDP
 			template<class T>
 			void print(T v, IOCTL_S::DEFAULT_DATA dd)
 			{
-				printf("*************************************************\n");
-				printf("INFO: \n");
-				
-				printATTR_ELEMENT();
+				if (dd.outside_print_function != NULL && dd.sdp_settings.print_with_outside_funct == 1)
+				{
+					dd.outside_print_function(DELIMITER_PRINT);
+					dd.outside_print_function(ATTR_NAME_21);
 
-				printVALUE_ELEMENT(v);
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
 
-				printf("Specification ID: 0x%04X\n", this->SpecificationID);
-				printf("Vendor ID: 0x%04X\n", this->VendorID);
-				printf("Product ID: 0x%04X\n", this->ProductID);
-				printf("Version: 0x%04X\n", this->Version);
-				printf("Primary Record: 0x%02X\n", this->PrimaryRecord);
-				printf("Vendor ID Source: 0x%04X\n", this->VendorIDSource);
+					char test[MAX_TEMP_STRING_LENGTH]{ 0 };
+					sprintf_s(test, "Specification ID: 0x%04X\n", this->SpecificationID);
+					dd.outside_print_function(test);
+
+					sprintf_s(test, "Vendor ID: 0x%04X\n", this->VendorID);
+					dd.outside_print_function(test);
+
+					sprintf_s(test, "Product ID: 0x%04X\n", this->ProductID);
+					dd.outside_print_function(test);
+
+					sprintf_s(test, "Version: 0x%04X\n", this->Version);
+					dd.outside_print_function(test);
+
+					sprintf_s(test, "Primary Record: 0x%02X\n", this->PrimaryRecord);
+					dd.outside_print_function(test);
+
+					sprintf_s(test, "Vendor ID Source: 0x%04X\n", this->VendorIDSource);
+					dd.outside_print_function(test);
+				}
+				else
+				{
+					printf(DELIMITER_PRINT);
+					printf(ATTR_NAME_21);
+
+					printATTR_ELEMENT(dd);
+					printVALUE_ELEMENT(v, dd);
+
+					printf("Specification ID: 0x%04X\n", this->SpecificationID);
+					printf("Vendor ID: 0x%04X\n", this->VendorID);
+					printf("Product ID: 0x%04X\n", this->ProductID);
+					printf("Version: 0x%04X\n", this->Version);
+					printf("Primary Record: 0x%02X\n", this->PrimaryRecord);
+					printf("Vendor ID Source: 0x%04X\n", this->VendorIDSource);
+				}
 			}
 
 		} INFO, * PINFO;

@@ -2,62 +2,9 @@
 
 #include <QtWidgets>
 #include "ui_bluetoothinfogui.h"
-#include "ui_by_address_dialog.h"
-
-
-
-
-
-
-class Dialog : public QDialog
-{
-    // TODO: dodaj gumb za clear all selections preko  dd.set_all_SDP_service_for_search(); in setCehckBoxes();
-    
-    
-    Q_OBJECT
-
-public:
-    Dialog(QWidget* parent = Q_NULLPTR);
-
-    ~Dialog();
-
-    void setCehckBoxes();
-
-    int flag_check;
-
-signals:
-    void stateChanged(int);
-    void button0();
-    void checkBox2(int);
-    void checkBox3(int);
-    void checkBox4(int);
-    void checkBox5(int);
-    void checkBox6(int);
-    void checkBox7(int);
-    void checkBox8(int);
-    void checkBox9(int);
-    void checkBox10(int);
-    void checkBox11(int);
-    void checkBox12(int);
-    void checkBox13(int);
-    void checkBox14(int);
-    void checkBox15(int);
-
-
-
-    
-
-public slots:
-    void check_all_services(int state);
-    
-
-private:
-    Ui::Dialog* ui_dialog;
-    
-};
-
-
-
+#include "settingsgui.h"
+#include "radiogui.h"
+#include "byaddressgui.h"
 
 
 
@@ -67,21 +14,34 @@ class BluetoothInfoGUI : public QMainWindow
 
 public:
     BluetoothInfoGUI(QWidget *parent = Q_NULLPTR);
-
-
-    Dialog* dialog;
     ~BluetoothInfoGUI();
 
+    ByAddress* dialog;
+    Radio* radio_dialog;
+    Settings* settings_dialog;
+
+    struct FLAGS
+    {
+        int connected_local_radio;
+    };
+    FLAGS flags;
 
     void on_SearchAndSelect();
     void on_ByAddress();
+    void on_radioData();
+    void on_settings();
     void on_About();
     void on_Exit();
 
+   
+
     void printLog(QString str, int append = 1);
+
+
 
 private slots:
     void connect_and_search();
+    void connect_local_radio();
     void saveState_2(int state);
     void saveState_3(int state);
     void saveState_4(int state);

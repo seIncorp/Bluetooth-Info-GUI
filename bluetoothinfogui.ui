@@ -95,6 +95,8 @@
     <addaction name="action_Radio_data"/>
     <addaction name="actionSearched_cached_devices"/>
     <addaction name="separator"/>
+    <addaction name="actionSettings"/>
+    <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
    <addaction name="menu_File"/>
@@ -138,6 +140,11 @@
   <action name="actionSearched_cached_devices">
    <property name="text">
     <string>&amp;Searched cached devices</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>
