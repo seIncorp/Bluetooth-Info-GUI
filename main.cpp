@@ -20,7 +20,7 @@
 */
 
 
-
+SEARCH_SETTINGS::SEARCH_ATTR search_attr;
 
 IOCTL_S::DEFAULT_DATA dd;
 

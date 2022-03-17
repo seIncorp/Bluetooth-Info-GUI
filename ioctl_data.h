@@ -13,7 +13,9 @@
 	- BUG: check why app crash when use and call set_all_SDP_service_for_search() with SDPsearch() [FIXED: NOT USING GenericAudio service]
 	- ADD: record attribute and not to use default directly
 	- ADD: dodaj se za print only one za outside print function (trenutno se vse sprinta)
-
+	- IMPROVE: da ce ima en service vec klicev za parametre naj se naredi eno defult func za vse te klice
+	
+	- ADD: dodaj se da se klice samo vnaprej dolocene parametere od dolocenega servica	<-- DONE!!!
 	- ADD: dodaj se za HandsfreeAudioGateway service	<-- DONE!!!
 	- ADD: dodaj se za razlikovanje Handsfree in HandsfreeAG izpis featurjev	<-- DONE!!!
 	- DO: popravi in uredi izpis PROTOCOL DESCRIPTOR LIST	<-- DONE!!!
@@ -579,6 +581,97 @@ namespace IOCTL_S
 			BYTE PnPInformation;
 		};
 
+		struct ATTRIBUTES_SEARCH_FOR_SERVICE
+		{
+			int all;
+
+			/* DEFAULT ATTR. */
+			int ServiceRecord;
+			int ServiceClassIDList;
+			int ProtocolDescriptorList;
+			int ServiceName;
+			int BluetoothProfileDescriptorList;
+			int ProviderName;
+			int LanguageBaseAttributeIdList;
+			int ServiceDescription;
+
+			/***********************************************/
+			/* SPECIAL ATTR. */
+
+			/* PNPINFO */
+			struct att_search_PNPINFO
+			{
+				int PnpInfo;
+			};
+			att_search_PNPINFO att_PNPINFO;
+
+			/* PBAP */
+			struct att_search_PBAP
+			{
+				int Goepl2cappsm;
+				int SupportedRepositories;
+				int SupportedFeatures;
+			};
+			att_search_PBAP att_PBAP;
+			
+			/* OBEX */
+			struct att_search_OBEX
+			{
+				int Goepl2cappsm;
+				int SupportedFormats;
+				int ServiceVersion;
+			};
+			att_search_OBEX att_OBEX;
+
+			/* NAP */
+			struct att_search_NAP
+			{
+				int SecurityDescription;
+				int NetAccessType;
+				int MaxNetAccessRate;
+			};
+			att_search_NAP att_NAP;
+			
+			/* HSP */
+			struct att_search_HSP
+			{
+				int RemoteAudioVolumeControl;
+			};
+			att_search_HSP att_HSP;
+			
+			/* HFP */
+			struct att_search_HFP
+			{
+				int Network;
+				int SupportedFeatures;
+			};
+			att_search_HFP att_HFP;
+			
+			/* AVRCP */
+			struct att_search_AVRCP
+			{
+				int SupportedFeatures;
+			};
+			att_search_AVRCP att_AVRCP;
+			
+			/* A2DP */
+			struct att_search_A2DP
+			{
+				int SupportedFeatures;
+			};
+			att_search_A2DP att_A2DP;
+
+			/* MAP */
+			struct att_search_MAP
+			{
+				int Goepl2cappsm;
+				int SupportedMessageTypes;
+				int MasInstanceId;
+				int MapSupportedFeatures;
+			};
+			att_search_MAP att_MAP;
+		};
+
 		struct SDP_exported_data
 		{
 			// SDP services
@@ -708,6 +801,7 @@ namespace IOCTL_S
 		SDP_services_for_search services_for_search;
 		SDP_exported_data exported_data;
 		SDP_settings sdp_settings;
+		ATTRIBUTES_SEARCH_FOR_SERVICE attr_search_for_service;
 
 		void reset_SDP_service_for_search();
 		void set_all_SDP_service_for_search();

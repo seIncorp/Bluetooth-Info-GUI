@@ -10,6 +10,8 @@ BluetoothInfoGUI::BluetoothInfoGUI(QWidget *parent) : QMainWindow(parent)
     //setCentralWidget(ui.treeWidget);
     
     flags = { 0 };
+    search_attr.setAllTo(1);
+
 
     /********************/
     /* MENU actions */
@@ -97,7 +99,6 @@ void BluetoothInfoGUI::on_SearchAndSelect()
 void BluetoothInfoGUI::on_settings()
 {
     settings_dialog = new Settings(this);
-
     settings_dialog->setVisible(true);
     settings_dialog->show();
     settings_dialog->exec();
