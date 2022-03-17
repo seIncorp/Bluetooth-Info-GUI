@@ -13,8 +13,8 @@ Settings::Settings(QWidget* parent) : QDialog(parent), ui_dialog_settings(new Ui
 {
     ui_dialog_settings->setupUi(this);
 
-    connect(ui_dialog_settings->checkBox1, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox1(int)));
-    connect(ui_dialog_settings->checkBox2, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox2(int)));
+    connect(ui_dialog_settings->checkBox1, SIGNAL(stateChanged(int)), this, SLOT(checkBox1_s(int)));
+    /*connect(ui_dialog_settings->checkBox2, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox2(int)));
     connect(ui_dialog_settings->checkBox3, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox3(int)));
     connect(ui_dialog_settings->checkBox4, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox4(int)));
     connect(ui_dialog_settings->checkBox5, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox5(int)));
@@ -118,7 +118,7 @@ Settings::Settings(QWidget* parent) : QDialog(parent), ui_dialog_settings(new Ui
     connect(ui_dialog_settings->checkBox94, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox94(int)));
     connect(ui_dialog_settings->checkBox95, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox95(int)));
     connect(ui_dialog_settings->checkBox96, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox96(int)));
-    connect(ui_dialog_settings->checkBox97, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox97(int)));
+    connect(ui_dialog_settings->checkBox97, SIGNAL(stateChanged(int)), this, SIGNAL(checkBox97(int)));*/
     
 
 
@@ -129,3 +129,521 @@ Settings::~Settings()
 {
     delete ui_dialog_settings;
 }
+
+/************************************************/
+/* headset */
+
+void Settings::checkBox1_s(int state)
+{
+    switch (state)
+    {
+        case Qt::Unchecked:
+            search_attr.headset.ServiceRecord = 0;
+        break;
+
+        case Qt::Checked:
+            search_attr.headset.ServiceRecord = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox2_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset.ServiceClassIDList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset.ServiceClassIDList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox3_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset.ProtocolDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset.ProtocolDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox4_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset.ServiceName = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset.ServiceName = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox5_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset.BluetoothProfileDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset.BluetoothProfileDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox6_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset.RemoteAudioVolumeControl = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset.RemoteAudioVolumeControl = 1;
+        break;
+    }
+
+}
+
+/************************************************/
+/* headset_ag */
+
+void Settings::checkBox7_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset_ag.ServiceRecord = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset_ag.ServiceRecord = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox8_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset_ag.ServiceClassIDList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset_ag.ServiceClassIDList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox9_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset_ag.ProtocolDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset_ag.ProtocolDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox10_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset_ag.ServiceName = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset_ag.ServiceName = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox11_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset_ag.BluetoothProfileDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset_ag.BluetoothProfileDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox12_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.headset_ag.RemoteAudioVolumeControl = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.headset_ag.RemoteAudioVolumeControl = 1;
+        break;
+    }
+
+}
+
+/************************************************/
+/* audiosource */
+
+void Settings::checkBox13_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.ServiceRecord = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.ServiceRecord = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox14_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.ServiceClassIDList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.ServiceClassIDList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox15_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.ProtocolDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.ProtocolDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox16_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.ServiceName = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.ServiceName = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox17_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.BluetoothProfileDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.BluetoothProfileDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox18_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.ProviderName = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.ProviderName = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox19_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.audiosource.SupportedFeatures = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.audiosource.SupportedFeatures = 1;
+        break;
+    }
+
+}
+
+/************************************************/
+/* handsfree */
+
+void Settings::checkBox20_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.ServiceRecord = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.ServiceRecord = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox21_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.ServiceClassIDList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.ServiceClassIDList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox22_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.ProtocolDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.ProtocolDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox23_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.ServiceName = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.ServiceName = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox24_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.BluetoothProfileDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.BluetoothProfileDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox25_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.Network = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.Network = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox26_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree.SupportedFeatures = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree.SupportedFeatures = 1;
+        break;
+    }
+
+}
+
+/************************************************/
+/* handsfree_ag */
+
+void Settings::checkBox27_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.ServiceRecord = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.ServiceRecord = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox28_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.ServiceClassIDList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.ServiceClassIDList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox29_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.ProtocolDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.ProtocolDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox30_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.ServiceName = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.ServiceName = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox31_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.BluetoothProfileDescriptorList = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.BluetoothProfileDescriptorList = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox32_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.Network = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.Network = 1;
+        break;
+    }
+
+}
+
+void Settings::checkBox33_s(int state)
+{
+    switch (state)
+    {
+    case Qt::Unchecked:
+        search_attr.handsfree_ag.SupportedFeatures = 0;
+        break;
+
+    case Qt::Checked:
+        search_attr.handsfree_ag.SupportedFeatures = 1;
+        break;
+    }
+
+}
+
+
+/************************************************/
+/* headset */
+
+
+
+

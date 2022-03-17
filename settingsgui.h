@@ -116,11 +116,40 @@ signals:
     void checkBox96(int);
     void checkBox97(int);
 
-
-
-
-
-    
+public slots:
+    void checkBox1_s(int);
+    void checkBox2_s(int);
+    void checkBox3_s(int);
+    void checkBox4_s(int);
+    void checkBox5_s(int);
+    void checkBox6_s(int);
+    void checkBox7_s(int);
+    void checkBox8_s(int);
+    void checkBox9_s(int);
+    void checkBox10_s(int);
+    void checkBox11_s(int);
+    void checkBox12_s(int);
+    void checkBox13_s(int);
+    void checkBox14_s(int);
+    void checkBox15_s(int);
+    void checkBox16_s(int);
+    void checkBox17_s(int);
+    void checkBox18_s(int);
+    void checkBox19_s(int);
+    void checkBox20_s(int);
+    void checkBox21_s(int);
+    void checkBox22_s(int);
+    void checkBox23_s(int);
+    void checkBox24_s(int);
+    void checkBox25_s(int);
+    void checkBox26_s(int);
+    void checkBox27_s(int);
+    void checkBox28_s(int);
+    void checkBox29_s(int);
+    void checkBox30_s(int);
+    void checkBox31_s(int);
+    void checkBox32_s(int);
+    void checkBox33_s(int);
 
 private:
     Ui::Dialog_Settings* ui_dialog_settings;

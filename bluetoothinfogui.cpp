@@ -102,6 +102,11 @@ void BluetoothInfoGUI::on_settings()
     settings_dialog->setVisible(true);
     settings_dialog->show();
     settings_dialog->exec();
+
+
+    char test[100];
+    sprintf_s(test, "--> %d", search_attr.audiosource.ServiceName);
+    printLog(test);
 }
 
 void BluetoothInfoGUI::on_About()
