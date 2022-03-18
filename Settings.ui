@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>690</width>
-    <height>560</height>
+    <height>612</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>600</x>
-     <y>530</y>
+     <x>610</x>
+     <y>570</y>
      <width>75</width>
      <height>24</height>
     </rect>
@@ -32,11 +32,11 @@
      <x>6</x>
      <y>9</y>
      <width>681</width>
-     <height>511</height>
+     <height>561</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tab">
     <attribute name="title">
@@ -48,14 +48,14 @@
        <x>0</x>
        <y>0</y>
        <width>671</width>
-       <height>481</height>
+       <height>531</height>
       </rect>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
       <item row="0" column="2">
        <widget class="QToolBox" name="toolBox3">
         <property name="currentIndex">
-         <number>3</number>
+         <number>2</number>
         </property>
         <widget class="QWidget" name="page11">
          <property name="geometry">
@@ -209,6 +209,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page12">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>PBAP</string>
          </attribute>
@@ -332,6 +340,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page13">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>409</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>MAP</string>
          </attribute>
@@ -465,6 +481,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page14">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>PnP info</string>
          </attribute>
@@ -474,7 +498,7 @@
       <item row="0" column="0">
        <widget class="QToolBox" name="toolBox1">
         <property name="currentIndex">
-         <number>2</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="page1">
          <property name="geometry">
@@ -588,6 +612,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>329</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>Headset_AG</string>
          </attribute>
@@ -691,6 +723,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>329</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>AudioSource</string>
          </attribute>
@@ -925,6 +965,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page5">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>379</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>Hands-free AG</string>
          </attribute>
@@ -1185,6 +1233,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page7">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>329</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>AV RemoteControl</string>
          </attribute>
@@ -1298,6 +1354,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page8">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>329</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>AV Remote Control Target</string>
          </attribute>
@@ -1411,6 +1475,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page9">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>329</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>AV Remote Control Controller</string>
          </attribute>
@@ -1524,6 +1596,14 @@
          </widget>
         </widget>
         <widget class="QWidget" name="page10">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>379</height>
+          </rect>
+         </property>
          <attribute name="label">
           <string>PANU</string>
          </attribute>
@@ -1655,6 +1735,1730 @@
     <attribute name="title">
      <string>Print</string>
     </attribute>
+    <widget class="QWidget" name="horizontalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>0</y>
+       <width>391</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QCheckBox" name="checkBox_debug">
+        <property name="text">
+         <string>Debug</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_print">
+        <property name="text">
+         <string>Print</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_printInfo">
+        <property name="text">
+         <string>Print info</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="gridLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>20</y>
+       <width>671</width>
+       <height>511</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="2">
+       <widget class="QToolBox" name="toolBox3_2">
+        <property name="currentIndex">
+         <number>2</number>
+        </property>
+        <widget class="QWidget" name="page11_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>100</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>NAP</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_30">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_30">
+           <item>
+            <widget class="QLabel" name="label_30">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox71_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox72_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox73_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox74_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox75_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_31">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_31">
+           <item>
+            <widget class="QLabel" name="label_31">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox76_2">
+             <property name="text">
+              <string>Language Base Attribute Id List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox77_2">
+             <property name="text">
+              <string>Service Description</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox78_2">
+             <property name="text">
+              <string>Security Description</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox79_2">
+             <property name="text">
+              <string>Net Access Type</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox80_2">
+             <property name="text">
+              <string>Max Net Access Rate</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page12_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>100</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>PBAP</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_14">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_14">
+           <item>
+            <widget class="QLabel" name="label_14">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox81_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox82_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox83_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox84_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox85_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_32">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>96</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_32">
+           <item>
+            <widget class="QLabel" name="label_32">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox86_2">
+             <property name="text">
+              <string>Goepl2cappsm</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox87_2">
+             <property name="text">
+              <string>Supported Repositories</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox88_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page13_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>389</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>MAP</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_33">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_15">
+           <item>
+            <widget class="QLabel" name="label_33">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox89_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox90_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox91_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox92_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox93_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_34">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>122</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_33">
+           <item>
+            <widget class="QLabel" name="label_34">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox94_2">
+             <property name="text">
+              <string>Goepl2cappsm</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox95_2">
+             <property name="text">
+              <string>Supported Message Types</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox96_2">
+             <property name="text">
+              <string>Mas Instance Id</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox97_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page14_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>389</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>PnP info</string>
+         </attribute>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QToolBox" name="toolBox1_2">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page1_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>Headset</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_6">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout1_2">
+           <item>
+            <widget class="QLabel" name="label_6">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox1_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox2_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox3_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox4_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox5_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_35">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>44</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout2_2">
+           <item>
+            <widget class="QLabel" name="label_35">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox6_2">
+             <property name="text">
+              <string>Remote Audio Volume Control</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page2_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>Headset_AG</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_11">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout3_2">
+           <item>
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox7_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox8_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox9_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox10_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox11_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_36">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>44</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout4_2">
+           <item>
+            <widget class="QLabel" name="label_36">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox12_2">
+             <property name="text">
+              <string>Remote Audio Volume Control</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page3_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>AudioSource</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_37">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>181</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_6">
+           <item>
+            <widget class="QLabel" name="label_37">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox13_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox14_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox15_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox16_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox17_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox18_2">
+             <property name="text">
+              <string>Provider Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_38">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>190</y>
+            <width>201</width>
+            <height>44</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_34">
+           <item>
+            <widget class="QLabel" name="label_38">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox19_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page4_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>Hands-Free</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_39">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_11">
+           <item>
+            <widget class="QLabel" name="label_39">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox20_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox21_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox22_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox23_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox24_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_40">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>70</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_35">
+           <item>
+            <widget class="QLabel" name="label_40">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox25_2">
+             <property name="text">
+              <string>Network</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox26_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page5_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>Hands-free AG</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_41">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_16">
+           <item>
+            <widget class="QLabel" name="label_41">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox27_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox28_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox29_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox30_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox31_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_42">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>70</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_36">
+           <item>
+            <widget class="QLabel" name="label_42">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox32_2">
+             <property name="text">
+              <string>Network</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox33_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QToolBox" name="toolBox2_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page6_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>Object Push</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_43">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>96</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_37">
+           <item>
+            <widget class="QLabel" name="label_43">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox39_2">
+             <property name="text">
+              <string>Goepl2cappsm</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox40_2">
+             <property name="text">
+              <string>Supported Formats</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox41_2">
+             <property name="text">
+              <string>Service Version</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_44">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_38">
+           <item>
+            <widget class="QLabel" name="label_44">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox34_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox35_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox36_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox37_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox38_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page7_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>100</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>AV RemoteControl</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_45">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_39">
+           <item>
+            <widget class="QLabel" name="label_45">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox42_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox43_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox44_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox45_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox46_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_46">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>70</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_40">
+           <item>
+            <widget class="QLabel" name="label_46">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox47_2">
+             <property name="text">
+              <string>ProviderName</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox48_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page8_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>100</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>AV Remote Control Target</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_47">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_41">
+           <item>
+            <widget class="QLabel" name="label_47">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox49_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox50_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox51_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox52_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox53_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_48">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>70</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_42">
+           <item>
+            <widget class="QLabel" name="label_48">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox54_2">
+             <property name="text">
+              <string>ProviderName</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox55_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page9_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>100</width>
+           <height>30</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>AV Remote Control Controller</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_49">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_43">
+           <item>
+            <widget class="QLabel" name="label_49">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox56_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox57_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox58_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox59_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox60_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_50">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>70</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_44">
+           <item>
+            <widget class="QLabel" name="label_50">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox61_2">
+             <property name="text">
+              <string>ProviderName</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox62_2">
+             <property name="text">
+              <string>Supported Features</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="page10_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>219</width>
+           <height>359</height>
+          </rect>
+         </property>
+         <attribute name="label">
+          <string>PANU</string>
+         </attribute>
+         <widget class="QWidget" name="verticalLayoutWidget_51">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>0</y>
+            <width>201</width>
+            <height>148</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_45">
+           <item>
+            <widget class="QLabel" name="label_51">
+             <property name="text">
+              <string>Default attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox63_2">
+             <property name="text">
+              <string>Service Record</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox64_2">
+             <property name="text">
+              <string>Class ID list</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox65_2">
+             <property name="text">
+              <string>Protocol Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox66_2">
+             <property name="text">
+              <string>Service Name</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox67_2">
+             <property name="text">
+              <string>Bluetooth Profile Descriptor List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="verticalLayoutWidget_52">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>160</y>
+            <width>201</width>
+            <height>96</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_46">
+           <item>
+            <widget class="QLabel" name="label_52">
+             <property name="text">
+              <string>Special attributes:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox68_2">
+             <property name="text">
+              <string>Language Base Attribute Id List</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox69_2">
+             <property name="text">
+              <string>Service Description</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBox70_2">
+             <property name="text">
+              <string>Security Description</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
   </widget>
  </widget>

@@ -11,7 +11,7 @@ BluetoothInfoGUI::BluetoothInfoGUI(QWidget *parent) : QMainWindow(parent)
     
     flags = { 0 };
     search_attr.setAllTo(1);
-
+    print_attr.setAllTo(1);
 
     /********************/
     /* MENU actions */
@@ -187,13 +187,11 @@ void BluetoothInfoGUI::saveState_2(int state)      // Headset
     switch (state)
     {
         case Qt::Checked:
-            //ui.textEdit->append("> Headset is checked");
             printLog("> Headset is checked");
             dd.services_for_search.Headset = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.textEdit->append("> Headset is unchecked");
             printLog("> Headset is unchecked");
             dd.services_for_search.Headset = 0x00;
         break;
@@ -205,13 +203,11 @@ void BluetoothInfoGUI::saveState_3(int state)      // Headset_AG
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("Headset_AG is checked");
             printLog("> Headset_AG is checked");
             dd.services_for_search.Headset_Audio_Gateway = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("Headset_AG is unchecked");
             printLog("> Headset_AG is unchecked");
             dd.services_for_search.Headset_Audio_Gateway = 0x00;
         break;
@@ -223,13 +219,11 @@ void BluetoothInfoGUI::saveState_4(int state)      // AudioSource
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("AudioSource is checked");
             printLog("> AudioSource is checked");
             dd.services_for_search.AudioSource = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("AudioSource is unchecked");
             printLog("> AudioSource is unchecked");
             dd.services_for_search.AudioSource = 0x00;
         break;
@@ -241,13 +235,11 @@ void BluetoothInfoGUI::saveState_5(int state)      // Hands-Free
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("Hands-Free is checked");
             printLog("> Hands-Free is checked");
             dd.services_for_search.Handsfree = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("Hands-Free is unchecked");
             printLog("> Hands-Free is unchecked");
             dd.services_for_search.Handsfree = 0x00;
         break;
@@ -259,13 +251,11 @@ void BluetoothInfoGUI::saveState_6(int state)      // Hands-free AG
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("Hands-free AG is checked");
             printLog("> Hands-free AG is checked");
             dd.services_for_search.HandsfreeAudioGateway = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("Hands-free AG is unchecked");
             printLog("> Hands-free AG is unchecked");
             dd.services_for_search.HandsfreeAudioGateway = 0x00;
         break;
@@ -277,13 +267,11 @@ void BluetoothInfoGUI::saveState_7(int state)      // Objec tPush
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("Objec tPush is checked");
             printLog("> Objec tPush is checked");
             dd.services_for_search.OBEXObjectPush = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("Objec tPush is unchecked");
             printLog("> Objec tPush is unchecked");
             dd.services_for_search.OBEXObjectPush = 0x00;
         break;
@@ -295,13 +283,11 @@ void BluetoothInfoGUI::saveState_8(int state)      // AV RemoteControl
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("AV RemoteControl is checked");
             printLog("> AV RemoteControl is checked");
             dd.services_for_search.A_V_RemoteControl = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("AV RemoteControl is unchecked");
             printLog("> AV RemoteControl is unchecked");
             dd.services_for_search.A_V_RemoteControl = 0x00;
         break;
@@ -313,13 +299,11 @@ void BluetoothInfoGUI::saveState_9(int state)      // AV Remote Control Target
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("AV Remote Control Target is checked");
             printLog("> AV Remote Control Target is checked");
             dd.services_for_search.A_V_RemoteControlTarget = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("AV Remote Control Target is unchecked");
             printLog("> AV Remote Control Target is unchecked");
             dd.services_for_search.A_V_RemoteControlTarget = 0x00;
         break;
@@ -331,13 +315,11 @@ void BluetoothInfoGUI::saveState_10(int state)      // AV Remote Control Control
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("AV Remote Control Controller is checked");
             printLog("> AV Remote Control Controller is checked");
             dd.services_for_search.A_V_RemoteControlController = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("AV Remote Control Controller is unchecked");
             printLog("> AV Remote Control Controller is unchecked");
             dd.services_for_search.A_V_RemoteControlController = 0x00;
         break;
@@ -349,13 +331,11 @@ void BluetoothInfoGUI::saveState_11(int state)      // PANU
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("PANU is checked");
             printLog("> PANU is checked");
             dd.services_for_search.PANU = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("PANU is unchecked");
             printLog("> PANU is unchecked");
             dd.services_for_search.PANU = 0x00;
         break;
@@ -367,13 +347,11 @@ void BluetoothInfoGUI::saveState_12(int state)      // NAP
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("NAP is checked");
             printLog("> NAP is checked");
             dd.services_for_search._NAP = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("NAP is unchecked");
             printLog("> NAP is unchecked");
             dd.services_for_search._NAP = 0x00;
         break;
@@ -385,13 +363,11 @@ void BluetoothInfoGUI::saveState_13(int state)      // PBAP
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage();
             printLog("> PBAP is checked");
             dd.services_for_search.Phonebook_Access_PSE = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("PBAP is unchecked");
             printLog("> PBAP is unchecked");
             dd.services_for_search.Phonebook_Access_PSE = 0x00;
         break;
@@ -403,13 +379,11 @@ void BluetoothInfoGUI::saveState_14(int state)      // MAP
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage();
             printLog("> MAP is checked");
             dd.services_for_search.Message_Access_Server = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("MAP is unchecked");
             printLog("> MAP is unchecked");
             dd.services_for_search.Message_Access_Server = 0x00;
         break;
@@ -421,13 +395,11 @@ void BluetoothInfoGUI::saveState_15(int state)      // PnP info
     switch (state)
     {
         case Qt::Checked:
-            //ui.statusBar->showMessage("PnP info is checked");
             printLog("> PnP info is checked");
             dd.services_for_search.PnPInformation = 0x01;
         break;
 
         case Qt::Unchecked:
-            //ui.statusBar->showMessage("PnP info is unchecked");
             printLog("> PnP info is unchecked");
             dd.services_for_search.PnPInformation = 0x00;
         break;
